@@ -25,7 +25,7 @@ export default function Profile() {
               />
             </div>
             <div className="profileInfo">
-                <h4 className="profileInfoName">Esin Çatkaya</h4>
+                <h4 className="profileInfoName">Ersin Çatkaya</h4>
                 <span className="profileInfoDesc">Hello my friends!</span>
             </div>
           </div>
