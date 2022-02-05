@@ -2,6 +2,7 @@ import "./post.css";
 import { MoreVert } from "@material-ui/icons";
 import { useEffect, useState } from "react";
 import { myApi } from "../../api/myApi";
+import {format } from "timeago.js"
 
 export default function Post({ post }) {
   const [like,setLike] = useState(post.likes.length)
@@ -38,7 +39,7 @@ export default function Post({ post }) {
             <span className="postUsername">
               {user.username}
             </span>
-            <span className="postDate">{post.date}</span>
+            <span className="postDate">{format(post.createdAt)}</span>
           </div>
           <div className="postTopRight">
             <MoreVert />
