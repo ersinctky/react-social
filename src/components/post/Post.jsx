@@ -3,6 +3,7 @@ import { MoreVert } from "@material-ui/icons";
 import { useEffect, useState } from "react";
 import { myApi } from "../../api/myApi";
 import {format } from "timeago.js"
+import { Link } from "react-router-dom";
 
 export default function Post({ post }) {
   const [like,setLike] = useState(post.likes.length)
@@ -14,13 +15,13 @@ export default function Post({ post }) {
   useEffect(() => {
 
     const fetchUser = async ()=>{
-      const res = await  myApi.get(`/users/${post.userId}`)
+      const res = await  myApi.get(`/users?userId=${post.userId}`)
       setUser(res.data)
     }
     fetchUser()
   
     
-   }, []);
+   }, [post.userId]);
 
   const likeHandler =()=>{
     setLike(isLiked ? like-1 : like+1)
@@ -31,11 +32,13 @@ export default function Post({ post }) {
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
+            <Link to={`/profile/${user.username}`}>
             <img
               className="postProfileImg"
               src={user.profilePicture || PF+"person/noAvatar.png"}
               alt=""
             />
+            </Link>
             <span className="postUsername">
               {user.username}
             </span>

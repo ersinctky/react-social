@@ -3,9 +3,24 @@ import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
+import { useEffect, useState } from "react";
+import { myApi } from "../../api/myApi";
 
 export default function Profile() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const [user,setUser]=useState({})
+
+
+  useEffect(() => {
+
+    const fetchUser = async ()=>{
+      const res = await  myApi.get(`/users?username=abcd`)
+      setUser(res.data)
+    }
+    fetchUser()
+  
+    
+   }, []);
 
   return (
     <>
@@ -17,23 +32,24 @@ export default function Profile() {
             <div className="profileCover">
               <img
                 className="profileCoverImg"
-                src={`${PF}post/3.jpeg`}
+                src={user.coverPicture || PF+"/person/noCover.png"}
                 alt=""
               />
               <img
                 className="profileUserImg"
-                src={`${PF}person/7.jpeg`}
+
+                src={user.coverPicture || PF+"/person/noAvatar.png"}
                 alt=""
               />
             </div>
             <div className="profileInfo">
-                <h4 className="profileInfoName">Ersin Çatkaya</h4>
-                <span className="profileInfoDesc">Hello my friends!</span>
+                <h4 className="profileInfoName">{user.username}</h4>
+                <span className="profileInfoDesc">{user?.desc}</span>
             </div>
           </div>
           <div className="profileRightBottom">
-            <Feed />
-            <Rightbar profile/>
+            <Feed username="abcd" />
+            <Rightbar user={user}/>
           </div>
         </div>
       </div>

@@ -5,20 +5,20 @@ import "./feed.css";
 import { myApi } from "../../api/myApi";
 
 
-export default function Feed() {
+export default function Feed({username}) {
   
  const [posts,setPosts]=useState([])
 
  useEffect(() => {
 
   const fetchPosts = async ()=>{
-    const res = await  myApi.get("/posts/timeline/61fbe1aedf59c5a95a42d987")
+    const res = username ? await  myApi.get("/posts/profile/"+ username) : await  myApi.get("/posts/timeline/61fbe1aedf59c5a95a42d987")
     setPosts(res.data)
   }
   fetchPosts()
 
   
- }, []);
+ }, [username]);
  
 
   return (
