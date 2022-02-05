@@ -5,22 +5,25 @@ import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
 import { useEffect, useState } from "react";
 import { myApi } from "../../api/myApi";
+import {useParams} from 'react-router';
+;
+
 
 export default function Profile() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [user,setUser]=useState({})
-
+  const username=useParams().username
 
   useEffect(() => {
 
     const fetchUser = async ()=>{
-      const res = await  myApi.get(`/users?username=abcd`)
+      const res = await  myApi.get(`/users?username=${username}`)
       setUser(res.data)
     }
     fetchUser()
   
     
-   }, []);
+   }, [username]);
 
   return (
     <>
@@ -48,7 +51,7 @@ export default function Profile() {
             </div>
           </div>
           <div className="profileRightBottom">
-            <Feed username="abcd" />
+            <Feed username={username} />
             <Rightbar user={user}/>
           </div>
         </div>
