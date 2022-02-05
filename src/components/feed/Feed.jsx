@@ -3,6 +3,8 @@ import Post from "../post/Post";
 import Share from "../share/Share";
 import "./feed.css";
 import axios from 'axios';
+import { myApi } from "../../api/myApi";
+
 
 export default function Feed() {
   
@@ -11,8 +13,9 @@ export default function Feed() {
  useEffect(() => {
 
   const fetchPosts = async ()=>{
-    const res = await  axios.get("http://localhost:8800/api/posts/timeline/61fbe1aedf59c5a95a42d987")
+    const res = await  myApi.get("/posts/timeline/61fbe1aedf59c5a95a42d987")
     setPosts(res.data)
+    console.log(res);
   }
   fetchPosts()
   console.log("first");
@@ -25,9 +28,9 @@ export default function Feed() {
     <div className="feed">
       <div className="feedWrapper">
         <Share />
-        {posts.map((p) => (
+        {/* {posts.map((p) => (
           <Post key={p.id} post={p} />
-        ))}
+        ))} */}
       </div>
     </div>
   );
