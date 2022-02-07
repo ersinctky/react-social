@@ -1,4 +1,4 @@
-import myApi from "./api/myApi";
+import { myApi } from "./api/myApi";
 export const loginCall = async (userCredential, dispatch) => {
   dispatch({ type: "LOGIN_START" });
   try {
