@@ -7,6 +7,7 @@ export default function Login() {
 
   const handleClick = (e)=>{
     e.preventDefault()
+    console.log(email.current.value);
   }
 
   return (
@@ -20,8 +21,8 @@ export default function Login() {
         </div>
         <div className="loginRight">
           <form className="loginBox" onSubmit={handleClick}>
-            <input placeholder="Email" type="email" className="loginInput" />
-            <input placeholder="Password" type="password" className="loginInput" />
+            <input placeholder="Email" type="email" className="loginInput" ref={email} required />
+            <input placeholder="Password" type="password" className="loginInput" ref={password} required minLength="6" />
             <button className="loginButton">Log In</button>
             <span className="loginForgot">Forgot Password?</span>
             <button className="loginRegisterButton">
